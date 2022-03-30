@@ -7,38 +7,55 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 tools:context=".views.NamesFragment"
 android:padding="15dp">
 
+
     <TextView
-        android:id="@+id/txt_FirstName"
+        android:id="@+id/txt_namefrag_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="112dp"
         android:gravity="center"
-        android:text="First Name "
+        android:text="@string/lbl_name_title"
         android:textSize="25sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_LastName"
+    <EditText
+        android:id="@+id/edit_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:gravity="center"
-        android:text="Last Name"
-        android:textSize="25sp"
+        android:layout_marginTop="168dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:tooltipText="@string/txt_name_tool_tip_text"
+        android:hint="@string/txt_name_tool_tip_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_namefrag_title" />
+
+    <TextView
+        android:id="@+id/lbl_namefrag_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:gravity="left"
+        android:text="@string/lbl_namefrag_instruction"
+        android:textSize="15sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_FirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_Name" />
 
     <Button
     android:id="@+id/btn_GetJoke"
     android:layout_width="190dp"
     android:layout_height="58dp"
     android:backgroundTint="@color/design_default_color_primary"
-    android:text="Get Joke"
+    android:text="@string/btn_getjoke_title"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,5 +67,7 @@ android:padding="15dp">
     android:text="Back"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

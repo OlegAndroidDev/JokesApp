@@ -13,8 +13,7 @@ class JokesApiRepositoryImpl(
         return jokeApi.getRandomJoke()
     }
 
-    override suspend fun getJokeWithName(firstName: String?, lastName: String?): Response<RandomJoke> {
-        Log.d("****** repository", "test")
+    override suspend fun getJokeWithName(firstName: String, lastName: String): Response<RandomJoke> {
         return jokeApi.getJokeWithName(firstName = firstName, lastName = lastName)
     }
 }
@@ -23,7 +22,7 @@ interface JokesApiRepository{
     suspend fun getRandomJoke():Response<RandomJoke>
 
     suspend fun getJokeWithName(
-                firstName: String? = null,
-                lastName: String? = null
+                firstName: String,
+                lastName: String
     ):Response<RandomJoke>
 }

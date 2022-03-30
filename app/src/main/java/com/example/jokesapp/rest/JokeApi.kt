@@ -14,8 +14,8 @@ interface JokeApi {
 
     @GET(RANDOM_PATH)
     suspend fun getJokeWithName(
-        @Query("firstName") firstName: String?=null,
-        @Query("lastName") lastName: String?=null
+        @Query("firstName") firstName: String,
+        @Query("lastName") lastName: String
     ): Response<RandomJoke>
 
     companion object{
