@@ -4,47 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.RandomFragment">
+    tools:context=".views.RandomFragment"
+    android:padding="10dp">
 
 
     <TextView
         android:id="@+id/txt_FirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="64dp"
         android:gravity="center"
-        android:text="Jokes"
-        android:textSize="25sp"
+        android:text="@string/random_fragment_title"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="451dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/chuck_norris_png6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_FirstName" />
+
     <Button
         android:id="@+id/btn_List"
-        android:layout_width="110dp"
-        android:layout_height="58dp"
+        android:layout_width="120dp"
+        android:layout_height="67dp"
         android:backgroundTint="@color/design_default_color_primary"
-        android:text="List"
+        android:text="@string/btn_list_title"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_Random"
-        android:layout_width="110dp"
-        android:layout_height="58dp"
+        android:layout_width="120dp"
+        android:layout_height="67dp"
         android:backgroundTint="@color/design_default_color_primary"
         android:text="Random Joke"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_Name"
         app:layout_constraintStart_toEndOf="@+id/btn_List" />
 
     <Button
         android:id="@+id/btn_Name"
-        android:layout_width="110dp"
-        android:layout_height="58dp"
+        android:layout_width="120dp"
+        android:layout_height="67dp"
         android:backgroundTint="@color/purple_500"
-        android:text="Name"
+        android:text="@string/btn_name_title"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

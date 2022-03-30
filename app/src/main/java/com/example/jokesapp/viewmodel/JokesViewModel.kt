@@ -1,5 +1,4 @@
 package com.example.jokesapp.viewmodel
-
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,25 +9,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 class JokesViewModel(
     private val jokesApiRepository: JokesApiRepository,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModel(){
-    private val _jokeMutable : MutableLiveData<ResultState> = MutableLiveData(ResultState.LOADING)
-    val jokeLiveData : LiveData<ResultState> get() = _jokeMutable
+    val jokeMutable : MutableLiveData<ResultState> = MutableLiveData(ResultState.LOADING)
+    val jokeLiveData : LiveData<ResultState> get() = jokeMutable
 
-    fun getRandomJoke(
-    ) {
-//        _joke.postValue(JokeState.LOADING)
-        Log.d("view model initial", jokeLiveData.value.toString())
+    fun getRandomJoke() {
         viewModelScope.launch(ioDispatcher) {
             try {
                 val response = jokesApiRepository.getRandomJoke()
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        _jokeMutable.postValue(ResultState.SUCCESS(it))
-                        Log.d("view model after", jokeLiveData.value.toString())
+                        jokeMutable.postValue(ResultState.SUCCESS(it))
                     }?: throw Exception("Response is Null")
                 }
                 else {
@@ -36,12 +30,12 @@ class JokesViewModel(
                 }
             }
             catch (e: Exception) {
-                _jokeMutable.postValue(ResultState.ERROR(e))
+                jokeMutable.postValue(ResultState.ERROR(e))
             }
         }
     }
-    fun resetState() {
-        _jokeMutable.postValue(ResultState.DEFAULT)
+    fun InitJokeMutable() {
+        jokeMutable.postValue(ResultState.LOADING)
     }
 //    fun getJokeWithName(firstName: String?, lastName: String?) {
 //        viewModelScope.launch (ioDispatcher){

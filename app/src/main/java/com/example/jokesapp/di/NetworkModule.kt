@@ -37,9 +37,7 @@ val networkModule = module {
             .build()
             .create(JokeApi::class.java)
 
-    
     fun providesDispatcher() = Dispatchers.IO
-
     single { providesLoggingInterceptor() }
     single { providesOkHttpClient(get()) }
     single { providesJokeApi(get()) }
