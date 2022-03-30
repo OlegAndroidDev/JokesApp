@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jokes_nav"
+    app:startDestination="@id/randomFragment">
+
+    <fragment
+        android:id="@+id/randomFragment"
+        android:name="com.example.jokesapp.views.RandomFragment"
+        android:label="fragment_random"
+        tools:layout="@layout/fragment_random" >
+        <action
+            android:id="@+id/action_randomFragment_to_namesFragment"
+            app:destination="@id/namesFragment" />
+        <action
+            android:id="@+id/action_randomFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.jokesapp.views.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_randomFragment"
+            app:destination="@id/randomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/namesFragment"
+        android:name="com.example.jokesapp.views.NamesFragment"
+        android:label="fragment_names"
+        tools:layout="@layout/fragment_names" >
+        <action
+            android:id="@+id/action_namesFragment_to_randomFragment"
+            app:destination="@id/randomFragment" />
+    </fragment>
+</navigation>
