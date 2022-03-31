@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/txt_FirstName"
+        android:id="@+id/txt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_FirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
 
     <Button
         android:id="@+id/btn_List"

@@ -37,16 +37,28 @@ val networkModule = module {
             .build()
             .create(JokeApi::class.java)
 
-    fun providesDispatcher() = Dispatchers.IO
+    fun providesJokesApiRepo(jokesApi: JokeApi): JokesApiRepository =
+        JokesApiRepositoryImpl(jokesApi)
+
+    //fun providesDispatcher() = Dispatchers.IO
+
     single { providesLoggingInterceptor() }
     single { providesOkHttpClient(get()) }
     single { providesJokeApi(get()) }
-    single { providesDispatcher() }
+    //single { providesDispatcher() }
+    single { providesJokesApiRepo(get()) }
 }
 
 val viewModelModule = module {
-    fun providesJokesApiRepo(jokesApi: JokeApi): JokesApiRepository = JokesApiRepositoryImpl(jokesApi)
-    single { providesJokesApiRepo(get()) }
+
+//    single { providesJokesApiRepo(get()) }
+//    viewModel {JokesViewModel(get(), get()) }
+
+    fun providesDispatcher() : CoroutineDispatcher = Dispatchers.IO
+
+    single { providesDispatcher() }
     viewModel {JokesViewModel(get(), get()) }
+
 }
+
 

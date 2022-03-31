@@ -27,7 +27,6 @@ class RandomFragment : BaseFragment() {
         binding.btnRandom .setOnClickListener{
             jokesViewModel.getRandomJoke()
         }
-
         binding.btnList.setOnClickListener{
             findNavController().navigate(R.id.action_randomFragment_to_listFragment)
         }
@@ -36,15 +35,17 @@ class RandomFragment : BaseFragment() {
         }
 
         jokesViewModel.jokeLiveData.observe(viewLifecycleOwner) { state ->
+            Log.d("*********Success ** ${state}", "Test")
             when(state) {
                 is ResultState.LOADING -> {
-//                    Toast.makeText(
-//                        requireContext(), "Loading ....", Toast.LENGTH_LONG
-//                    ).show()
+                    Toast.makeText(
+                        requireContext(), "Loading ....", Toast.LENGTH_LONG
+                    ).show()
                 }
                 is ResultState.SUCCESS<*> -> {
+                    Log.d("*********Success ** ${state}", "Test")
                     val jokes = state.jokes as RandomJoke
-                    val joke = jokes.joke
+                    val joke = jokes.joke.first()
                     AlertDialog.Builder(requireContext())
                         .setMessage(joke.joke)
                         .setPositiveButton("Dismiss") { dialog, i ->
@@ -52,8 +53,8 @@ class RandomFragment : BaseFragment() {
                             dialog.cancel()
                         }
                         .show()
-                    jokesViewModel.jokeMutable.postValue(ResultState.INIT)
-                    //jokesViewModel.resetState()
+                    //jokesViewModel.jokeMutable.postValue(ResultState.INIT)
+                    jokesViewModel.InitJokeMutable()
                 }
                 is ResultState.ERROR -> {
                     Toast.makeText(

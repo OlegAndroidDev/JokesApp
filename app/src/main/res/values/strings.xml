@@ -8,5 +8,5 @@
     <string name="lbl_name_title">PLEASE ENTER THE FIRST AND LAST NAME OF CHARACTER</string>
     <string name="btn_getjoke_title">Get a Joke</string>
     <string name="txt_name_tool_tip_text">First And Last Name</string>
-    <string name = "lbl_namefrag_instruction">TEXT VALIDATION\n \n At least 1 chatacter for the First and Last Name \n First and Last Name divided by space</string>
+    <string name="lbl_namefrag_instruction">TEXT VALIDATION\n \n At least 1 chatacter for the First and Last Name \n First and Last Name divided by space</string>
 </resources>

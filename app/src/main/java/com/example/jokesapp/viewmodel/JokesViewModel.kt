@@ -14,16 +14,18 @@ class JokesViewModel(
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModel(){
 
-    val jokeMutable : MutableLiveData<ResultState> = MutableLiveData(ResultState.LOADING)
-    val jokeLiveData : LiveData<ResultState> get() = jokeMutable
+    private val _jokeMutable : MutableLiveData<ResultState> = MutableLiveData(ResultState.LOADING)
+    val jokeLiveData : LiveData<ResultState> get() = _jokeMutable
 
     fun getRandomJoke() {
+        _jokeMutable .postValue(ResultState.LOADING)
         viewModelScope.launch(ioDispatcher) {
+            Log.d("*********Model", "Test")
             try {
                 val response = jokesApiRepository.getRandomJoke()
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        jokeMutable.postValue(ResultState.SUCCESS(it))
+                        _jokeMutable.postValue(ResultState.SUCCESS(it))
                     }?: throw Exception("Response is Null")
                 }
                 else {
@@ -31,7 +33,27 @@ class JokesViewModel(
                 }
             }
             catch (e: Exception) {
-                jokeMutable.postValue(ResultState.ERROR(e))
+                _jokeMutable.postValue(ResultState.ERROR(e))
+            }
+        }
+    }
+
+    fun getNumberJoke(number : Int = 1) {
+        Log.d("******* GetJoke ****", "*****")
+        viewModelScope.launch(ioDispatcher) {
+            try {
+                val response = jokesApiRepository.getNumberJoke(number)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _jokeMutable.postValue(ResultState.SUCCESS(it))
+                    }?: throw Exception("Response is Null")
+                }
+                else {
+                    throw Exception("Unsuccessful Response")
+                }
+            }
+            catch (e: Exception) {
+                _jokeMutable.postValue(ResultState.ERROR(e))
             }
         }
     }
@@ -42,7 +64,7 @@ class JokesViewModel(
                 val response = jokesApiRepository.getJokeWithName(fName, lName)
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        jokeMutable.postValue(ResultState.SUCCESS(it))
+                        _jokeMutable.postValue(ResultState.SUCCESS(it))
                     }?: throw Exception("Response is Null")
                 }
                 else {
@@ -50,12 +72,12 @@ class JokesViewModel(
                 }
             }
             catch (e: Exception) {
-                jokeMutable.postValue(ResultState.ERROR(e))
+                _jokeMutable.postValue(ResultState.ERROR(e))
             }
         }
     }
 
     fun InitJokeMutable() {
-        jokeMutable.postValue(ResultState.LOADING)
+        _jokeMutable.postValue(ResultState.INIT)
     }
 }

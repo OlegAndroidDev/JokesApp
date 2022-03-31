@@ -1,30 +1,33 @@
 package com.example.jokesapp.views
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentResultListener
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.jokesapp.R
+import com.example.jokesapp.adapter.JokeAdapter
 import com.example.jokesapp.databinding.FragmentListBinding
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.jokesapp.model.Joke
+import com.example.jokesapp.model.RandomJoke
+import com.example.jokesapp.viewmodel.ResultState
 
 class ListFragment : BaseFragment() {
-
 
     private val binding by lazy{
         FragmentListBinding.inflate(layoutInflater)
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val jokeAdapter by lazy {
+        JokeAdapter()
     }
+    private var _listToUpdate = mutableListOf<Joke>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +38,50 @@ class ListFragment : BaseFragment() {
             findNavController().navigateUp()
         }
 
-        return binding.root
-    }
+        val valLayoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false)
 
-    companion object {
-        fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        binding.jokeRecycler.apply {
+            layoutManager = valLayoutManager
+            adapter = jokeAdapter
+        }
+
+        jokesViewModel.jokeLiveData.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is ResultState.LOADING -> {
+                    Toast.makeText(
+                        requireContext(), "Loading ....", Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                is ResultState.SUCCESS<*> -> {
+                    val jokes = state.jokes as RandomJoke
+                    _listToUpdate = jokes.joke as MutableList<Joke>
+
+                    jokeAdapter.updateJokes(_listToUpdate)
+                    jokesViewModel.InitJokeMutable()
+                }
+                is ResultState.ERROR -> {
+                    Toast.makeText(
+                        requireContext(), state.throwable.localizedMessage, Toast.LENGTH_LONG
+                    ).show()
                 }
             }
+        }
+
+        jokesViewModel.getNumberJoke(20)
+
+        binding.jokeRecycler.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (valLayoutManager.findLastVisibleItemPosition() == jokeAdapter.itemCount - 1) {
+                    jokesViewModel.getNumberJoke(20)
+                }
+            }
+        })
+        return binding.root
     }
 }

@@ -64,7 +64,7 @@ class NamesFragment : BaseFragment() {
             }
             is ResultState.SUCCESS<*> -> {
                 val jokes = state.jokes as RandomJoke
-                val joke = jokes.joke
+                val joke = jokes.joke.first()
                 AlertDialog.Builder(requireContext())
                     .setMessage(joke.joke)
                     .setPositiveButton("Dismiss") { dialog, i ->
@@ -72,8 +72,8 @@ class NamesFragment : BaseFragment() {
                         dialog.cancel()
                     }
                     .show()
-                jokesViewModel.jokeMutable.postValue(ResultState.INIT)
-                //jokesViewModel.resetState()
+                //jokesViewModel.jokeMutable.postValue(ResultState.INIT)
+                jokesViewModel.InitJokeMutable()
             }
             is ResultState.ERROR -> {
                 Toast.makeText(
