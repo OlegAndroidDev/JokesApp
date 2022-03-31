@@ -9,10 +9,6 @@ import retrofit2.http.Query
 
 interface JokeApi {
 
-//    @GET(RANDOM_PATH)
-//    suspend fun getRandomJoke(
-//    ):Response<RandomJoke>
-
     @GET("$NUMBER_PATH{number}")
     suspend fun getRandomJoke(
         @Path("number") number : Int = 1
@@ -22,12 +18,6 @@ interface JokeApi {
     suspend fun getNumberJoke(
         @Path("number") number : Int = 1
     ):Response<RandomJoke>
-
-//    @GET(RANDOM_PATH)
-//    suspend fun getJokeWithName(
-//        @Query("firstName") firstName: String,
-//        @Query("lastName") lastName: String
-//    ): Response<RandomJoke>
 
     @GET("$NUMBER_PATH{number}")
     suspend fun getJokeWithName(

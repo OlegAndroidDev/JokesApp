@@ -35,15 +35,13 @@ class RandomFragment : BaseFragment() {
         }
 
         jokesViewModel.jokeLiveData.observe(viewLifecycleOwner) { state ->
-            Log.d("*********Success ** ${state}", "Test")
             when(state) {
                 is ResultState.LOADING -> {
-                    Toast.makeText(
-                        requireContext(), "Loading ....", Toast.LENGTH_LONG
-                    ).show()
+//                    Toast.makeText(
+//                        requireContext(), "Loading ....", Toast.LENGTH_LONG
+//                    ).show()
                 }
                 is ResultState.SUCCESS<*> -> {
-                    Log.d("*********Success ** ${state}", "Test")
                     val jokes = state.jokes as RandomJoke
                     val joke = jokes.joke.first()
                     AlertDialog.Builder(requireContext())

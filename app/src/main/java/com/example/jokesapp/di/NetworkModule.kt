@@ -51,11 +51,7 @@ val networkModule = module {
 
 val viewModelModule = module {
 
-//    single { providesJokesApiRepo(get()) }
-//    viewModel {JokesViewModel(get(), get()) }
-
     fun providesDispatcher() : CoroutineDispatcher = Dispatchers.IO
-
     single { providesDispatcher() }
     viewModel {JokesViewModel(get(), get()) }
 

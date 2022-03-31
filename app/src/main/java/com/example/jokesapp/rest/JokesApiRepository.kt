@@ -9,15 +9,10 @@ class JokesApiRepositoryImpl(
     private val jokeApi: JokeApi
 ) : JokesApiRepository{
 
-//    override suspend fun getRandomJoke():
-//            Response<RandomJoke> {
-//        return jokeApi.getRandomJoke()
-//    }
-
-    override suspend fun getRandomJoke(
-    ): Response<RandomJoke> =
-        jokeApi.getRandomJoke()
-
+    override suspend fun getRandomJoke():
+            Response<RandomJoke> {
+        return jokeApi.getRandomJoke()
+    }
     override suspend fun getJokeWithName(firstName: String, lastName: String): Response<RandomJoke> {
         return jokeApi.getJokeWithName(firstName = firstName, lastName = lastName)
     }

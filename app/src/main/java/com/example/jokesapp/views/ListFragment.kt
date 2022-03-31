@@ -51,9 +51,9 @@ class ListFragment : BaseFragment() {
         jokesViewModel.jokeLiveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is ResultState.LOADING -> {
-                    Toast.makeText(
-                        requireContext(), "Loading ....", Toast.LENGTH_LONG
-                    ).show()
+//                    Toast.makeText(
+//                        requireContext(), "Loading ....", Toast.LENGTH_LONG
+//                    ).show()
                 }
 
                 is ResultState.SUCCESS<*> -> {

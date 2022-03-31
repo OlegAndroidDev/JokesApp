@@ -40,9 +40,6 @@ class NamesFragment : BaseFragment() {
             val fullName = binding.editName.getText().trim() //binding.editName.toString().trim()
 
             if(fullName.isNotEmpty() && binding.editName.getText().length > 2 && (fullName.contains(" "))){
-
-                Log.d("******** Test ${fullName.isNotEmpty()} ${binding.editName.getText().length} ${fullName.contains(" ")}", "test ")
-
                 val firstName = (fullName.trim().split(" ")).first().replaceFirstChar { it.uppercase() }
                 val lastName = (fullName.trim().split(" "))[1].replaceFirstChar { it.uppercase() }
                 jokesViewModel.getJokeWithName(firstName, lastName)

@@ -20,7 +20,6 @@ class JokesViewModel(
     fun getRandomJoke() {
         _jokeMutable .postValue(ResultState.LOADING)
         viewModelScope.launch(ioDispatcher) {
-            Log.d("*********Model", "Test")
             try {
                 val response = jokesApiRepository.getRandomJoke()
                 if (response.isSuccessful) {
@@ -39,7 +38,6 @@ class JokesViewModel(
     }
 
     fun getNumberJoke(number : Int = 1) {
-        Log.d("******* GetJoke ****", "*****")
         viewModelScope.launch(ioDispatcher) {
             try {
                 val response = jokesApiRepository.getNumberJoke(number)
