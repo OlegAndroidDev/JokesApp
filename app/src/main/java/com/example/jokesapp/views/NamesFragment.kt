@@ -52,7 +52,7 @@ class NamesFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun handleState(state: ResultState?) {
+    private fun handleState(state: ResultState) {
         when(state) {
             is ResultState.LOADING -> {
 //                    Toast.makeText(
@@ -76,6 +76,9 @@ class NamesFragment : BaseFragment() {
                 Toast.makeText(
                     requireContext(), state.throwable.localizedMessage, Toast.LENGTH_LONG
                 ).show()
+            }
+            ResultState.INIT -> {
+                // no--op
             }
         }
     }
