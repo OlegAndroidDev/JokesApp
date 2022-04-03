@@ -51,13 +51,15 @@ class RandomFragment : BaseFragment() {
                             dialog.cancel()
                         }
                         .show()
-                    //jokesViewModel.jokeMutable.postValue(ResultState.INIT)
                     jokesViewModel.InitJokeMutable()
                 }
                 is ResultState.ERROR -> {
                     Toast.makeText(
                         requireContext(), state.throwable.localizedMessage, Toast.LENGTH_LONG
                     ).show()
+                }
+                ResultState.INIT -> {
+                    // no-op
                 }
             }
         }

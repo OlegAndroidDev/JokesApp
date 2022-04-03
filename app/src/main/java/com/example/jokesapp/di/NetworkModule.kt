@@ -1,6 +1,5 @@
 package com.example.jokesapp.di
 
-import com.example.jokesapp.model.Joke
 import com.example.jokesapp.rest.JokeApi
 import com.example.jokesapp.rest.JokeApi.Companion.BASE_URL
 import com.example.jokesapp.rest.JokesApiRepository
@@ -31,7 +30,7 @@ val networkModule = module {
 
     fun providesJokeApi(okHttpClient: OkHttpClient) =
         Retrofit.Builder()
-            .baseUrl(JokeApi.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -40,12 +39,9 @@ val networkModule = module {
     fun providesJokesApiRepo(jokesApi: JokeApi): JokesApiRepository =
         JokesApiRepositoryImpl(jokesApi)
 
-    //fun providesDispatcher() = Dispatchers.IO
-
     single { providesLoggingInterceptor() }
     single { providesOkHttpClient(get()) }
     single { providesJokeApi(get()) }
-    //single { providesDispatcher() }
     single { providesJokesApiRepo(get()) }
 }
 
